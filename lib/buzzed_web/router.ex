@@ -78,6 +78,8 @@ defmodule BuzzedWeb.Router do
     get "/user/settings", UserSettingsController, :edit
     put "/user/settings", UserSettingsController, :update
     get "/user/settings/confirm_email/:token", UserSettingsController, :confirm_email
+
+    live "/home", HomeLive
   end
 
   scope "/", BuzzedWeb do
