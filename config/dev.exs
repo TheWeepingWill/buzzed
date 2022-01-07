@@ -24,15 +24,7 @@ config :buzzed, BuzzedWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "Iw8xwBnkQVgsupEqRh38hBw5/GMpl7/LKLVUKUP6VRffOmpgO6OMW0sUcQ1kVXk3",
   watchers: [
-  esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
-    npx: [
-      "tailwindcss",
-      "--input=css/app.css",
-      "--output=../priv/static/assets/app.css",
-      "--postcss",
-      "--watch",
-      cd: Path.expand("../assets", __DIR__)
-    ]
+  esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
   ]
 
 # ## SSL Support
