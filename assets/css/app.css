@@ -1,3 +1,6 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 
 /* Alerts and form errors used by phx.new */
