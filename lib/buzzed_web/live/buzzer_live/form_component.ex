@@ -41,7 +41,9 @@ defmodule BuzzedWeb.BuzzerLive.FormComponent do
   end
 
   defp save_buzzer(socket, :new, buzzer_params) do
-    case Games.create_buzzer(buzzer_params) do
+    params = Map.put(buzzer_params, "creator_id", socket.assigns.creator_id)
+
+    case Games.create_buzzer(params) do
       {:ok, _buzzer} ->
         {:noreply,
          socket
