@@ -8,6 +8,7 @@
       title={@page_title}
       action={@live_action}
       buzzer={@buzzer}
+      creator_id={@current_user.id}
       return_to={Routes.buzzer_index_path(@socket, :index)}
     />
   </.modal>

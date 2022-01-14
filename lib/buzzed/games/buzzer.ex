@@ -6,8 +6,7 @@ defmodule Buzzed.Games.Buzzer do
   @foreign_key_type :binary_id
   schema "buzzers" do
     field :title, :string
-    field :players, :binary_id
-    field :creator, :binary_id
+    belongs_to :creator, Buzzed.Accounts.User, type: :binary_id
 
     timestamps()
   end
@@ -15,7 +14,7 @@ defmodule Buzzed.Games.Buzzer do
   @doc false
   def changeset(buzzer, attrs) do
     buzzer
-    |> cast(attrs, [:title])
-    |> validate_required([:title])
+    |> cast(attrs, [:title, :creator_id])
+    |> validate_required([:title, :creator_id])
   end
 end
