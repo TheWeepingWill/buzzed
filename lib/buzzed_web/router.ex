@@ -83,8 +83,8 @@ defmodule BuzzedWeb.Router do
     live "/buzzers/new", BuzzerLive.Index, :new
     live "/buzzers/:id/edit", BuzzerLive.Index, :edit
 
-    live "/buzzers/:id", BuzzerLive.Show, :show
-    live "/buzzers/:id/show/edit", BuzzerLive.Show, :edit
+    live "/buzzers/:id", BuzzerLive.Play, :play
+    live "/buzzers/:id/play/edit", BuzzerLive.Play, :edit
 
     live "/home", HomeLive
   end
