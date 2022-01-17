@@ -79,15 +79,15 @@ defmodule BuzzedWeb.Router do
     put "/user/settings", UserSettingsController, :update
     get "/user/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
-    live "/buzzers", BuzzerLive.Index, :index
-    live "/buzzers/new", BuzzerLive.Index, :new
-    live "/buzzers/:id/edit", BuzzerLive.Index, :edit
+    live "/games", GameLive.Index, :index
+    live "/games/new", GameLive.Index, :new
+    live "/games/:id/edit", GameLive.Index, :edit
 
-    live "/buzzers/play/:id", BuzzerLive.Play, :play
-    live "/buzzers/play/:id/play/edit", BuzzerLive.Play, :edit
+    live "/games/play/:id", GameLive.Play, :play
+    live "/games/play/:id/play/edit", GameLive.Play, :edit
 
-    live "/buzzers/show/:id", BuzzerLive.Show, :show
-    live "/buzzers/show/:id/show/edit", BuzzerLive.Show, :edit
+    live "/games/show/:id", GameLive.Show, :show
+    live "/games/show/:id/show/edit", GameLive.Show, :edit
   end
 
   scope "/", BuzzedWeb do
