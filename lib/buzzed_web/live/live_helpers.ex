@@ -12,14 +12,14 @@ defmodule BuzzedWeb.LiveHelpers do
 
   ## Examples
 
-      <.modal return_to={Routes.buzzer_index_path(@socket, :index)}>
+      <.modal return_to={Routes.game_index_path(@socket, :index)}>
         <.live_component
-          module={BuzzedWeb.BuzzerLive.FormComponent}
-          id={@buzzer.id || :new}
+          module={BuzzedWeb.GameLive.FormComponent}
+          id={@game.id || :new}
           title={@page_title}
           action={@live_action}
-          return_to={Routes.buzzer_index_path(@socket, :index)}
-          buzzer: @buzzer
+          return_to={Routes.game_index_path(@socket, :index)}
+          game: @game
         />
       </.modal>
   """

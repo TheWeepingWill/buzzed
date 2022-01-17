@@ -1,4 +1,4 @@
-defmodule BuzzedWeb.BuzzerLive.Play do
+defmodule BuzzedWeb.GameLive.Show do
   use BuzzedWeb, :live_view
 
   alias Buzzed.Games
@@ -13,9 +13,9 @@ defmodule BuzzedWeb.BuzzerLive.Play do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:buzzer, Games.get_buzzer!(id))}
+     |> assign(:game, Games.get_game!(id))}
   end
 
-  defp page_title(:play), do: "Play Buzzer"
-  defp page_title(:edit), do: "Edit Buzzer"
+  defp page_title(:show), do: "Show Game"
+  defp page_title(:edit), do: "Edit Game"
 end

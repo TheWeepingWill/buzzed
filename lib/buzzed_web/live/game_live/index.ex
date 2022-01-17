@@ -1,15 +1,15 @@
-defmodule BuzzedWeb.BuzzerLive.Index do
+defmodule BuzzedWeb.GameLive.Index do
   use BuzzedWeb, :live_view
 
   alias Buzzed.Games
-  alias Buzzed.Games.Buzzer
+  alias Buzzed.Games.Game
   alias Buzzed.Accounts
 
   @impl true
   def mount(_params, %{"user_token" => token}, socket) do
     {:ok,
      socket
-     |> assign(:buzzers, list_buzzers())
+     |> assign(:games, list_games())
      |> assign(:current_user, Accounts.get_user_by_session_token(token))}
   end
 
@@ -20,31 +20,31 @@ defmodule BuzzedWeb.BuzzerLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Buzzer")
-    |> assign(:buzzer, Games.get_buzzer!(id))
+    |> assign(:page_title, "Edit Game")
+    |> assign(:game, Games.get_game!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Buzzer")
-    |> assign(:buzzer, %Buzzer{})
+    |> assign(:page_title, "New Game")
+    |> assign(:game, %Game{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Buzzers")
-    |> assign(:buzzer, nil)
+    |> assign(:page_title, "Listing Games")
+    |> assign(:game, nil)
   end
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    buzzer = Games.get_buzzer!(id)
-    {:ok, _} = Games.delete_buzzer(buzzer)
+    game = Games.get_game!(id)
+    {:ok, _} = Games.delete_game(game)
 
-    {:noreply, assign(socket, :buzzers, list_buzzers())}
+    {:noreply, assign(socket, :games, list_games())}
   end
 
-  defp list_buzzers do
-    Games.list_buzzers()
+  defp list_games do
+    Games.list_games()
   end
 end

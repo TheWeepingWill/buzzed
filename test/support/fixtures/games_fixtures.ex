@@ -5,16 +5,16 @@ defmodule Buzzed.GamesFixtures do
   """
 
   @doc """
-  Generate a buzzer.
+  Generate a game.
   """
-  def buzzer_fixture(attrs \\ %{}) do
-    {:ok, buzzer} =
+  def game_fixture(attrs \\ %{}) do
+    {:ok, game} =
       attrs
       |> Enum.into(%{
         title: "some title"
       })
-      |> Buzzed.Games.create_buzzer()
+      |> Buzzed.Games.create_game()
 
-    buzzer
+    game
   end
 end
