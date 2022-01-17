@@ -28,7 +28,9 @@
         <td><%= buzzer.title %></td>
 
         <td>
+          <span><%= live_redirect "Show", to: Routes.buzzer_show_path(@socket, :show, buzzer) %></span>
           <span><%= live_redirect "Play", to: Routes.buzzer_play_path(@socket, :play, buzzer) %></span>
+
           <span><%= live_patch "Edit", to: Routes.buzzer_index_path(@socket, :edit, buzzer) %></span>
           <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: buzzer.id, data: [confirm: "Are you sure?"] %></span>
         </td>
