@@ -20,7 +20,7 @@ defmodule BuzzedWeb.Router do
   scope "/", BuzzedWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", HomeLive
   end
 
   # Other scopes may use custom stacks.
@@ -83,10 +83,11 @@ defmodule BuzzedWeb.Router do
     live "/buzzers/new", BuzzerLive.Index, :new
     live "/buzzers/:id/edit", BuzzerLive.Index, :edit
 
-    live "/buzzers/:id", BuzzerLive.Play, :play
-    live "/buzzers/:id/play/edit", BuzzerLive.Play, :edit
+    live "/buzzers/play/:id", BuzzerLive.Play, :play
+    live "/buzzers/play/:id/play/edit", BuzzerLive.Play, :edit
 
-    live "/home", HomeLive
+    live "/buzzers/show/:id", BuzzerLive.Show, :show
+    live "/buzzers/show/:id/show/edit", BuzzerLive.Show, :edit
   end
 
   scope "/", BuzzedWeb do
