@@ -48,7 +48,7 @@ defmodule BuzzedWeb.GameLive.FormComponent do
         {:noreply,
          socket
          |> put_flash(:info, "Game created successfully")
-         |> push_redirect(to: socket.assigns.return_to)}
+         |> push_redirect(to: Routes.game_play_path(socket, :play, List.last(Games.list_games())))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
