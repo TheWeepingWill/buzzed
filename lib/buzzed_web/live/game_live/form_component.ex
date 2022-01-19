@@ -42,13 +42,13 @@ defmodule BuzzedWeb.GameLive.FormComponent do
 
   defp save_game(socket, :new, game_params) do
     params = Map.put(game_params, "creator_id", socket.assigns.creator_id)
-
-    case Games.create_game(params) do
+    game = Games.create_game(params)
+    case game do
       {:ok, _game} ->
         {:noreply,
          socket
          |> put_flash(:info, "Game created successfully")
-         |> push_redirect(to: Routes.game_play_path(socket, :play, List.last(Games.list_games())))}
+         |> push_redirect(to: Routes.game_play_path(socket, :play, elem(game, 1)))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
