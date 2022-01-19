@@ -1,39 +1,53 @@
-<h1>Play Game</h1>
+<div class="items-center absolute left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%]">
+  <div>
+    <h1>Play Game</h1>
 
-<%= if @live_action in [:edit] do %>
-  <.modal return_to={Routes.game_play_path(@socket, :play, @game)}>
-    <.live_component
-      module={BuzzedWeb.GameLive.FormComponent}
-      id={@game.id}
-      title={@page_title}
-      action={@live_action}
-      game={@game}
-      return_to={Routes.game_play_path(@socket, :play, @game)}
-    />
-  </.modal>
-<% end %>
+    <%= if @live_action in [:edit] do %>
+      <.modal return_to={Routes.game_play_path(@socket, :play, @game)}>
+        <.live_component
+          module={BuzzedWeb.GameLive.FormComponent}
+          id={@game.id}
+          title={@page_title}
+          action={@live_action}
+          game={@game}
+          return_to={Routes.game_play_path(@socket, :play, @game)}
+        />
+      </.modal>
+    <% end %>
 
-<ul>
+        <strong>Title:</strong>
+        <%= @game.title %>
+<br>
 
-  <li>
-    <strong>Title:</strong>
-    <%= @game.title %>
-  </li>
-
-</ul>
-
-<span><%= live_patch "Edit", to: Routes.game_play_path(@socket, :edit, @game), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.game_index_path(@socket, :index) %></span>
-
-<div class="bg-white py-24 flex items-center justify-center">
-  <div class="relative">
-
-    <div class="bg-green-900 absolute -bottom-2 w-44  h-44  rounded-full flex items-center justify-center"></div>
-
-      <div class="bg-green-500 w-44  h-44 rounded-full flex items-center  justify-center text-center rotate-0 ">
-    <h1 class="text-5xl ">Buzzer</h1></div>
-
+    <span><%= live_patch "Edit", to: Routes.game_play_path(@socket, :edit, @game), class: "button" %></span> |
+    <span><%= live_redirect "Back", to: Routes.game_index_path(@socket, :index) %></span>
   </div>
 
+  <div>
+    <button><%= link button_buzz(@socket), to: "#", phx_click: "buzz", phx_value_id: "data" %></button>
+  </div>
+  <div>
 
+    <button>
+      <%= link button_clear(@socket), to: "#", phx_click: "clear-buzzes", phx_value_id: "data" %>
+    </button>
+    
+    <button class="bg-gradient-to-r from-[#ffc300] to-[#eb5e28] transition-colors rounded-[8px] px-[15px] py-[4px] text-white">
+      <%= link "Next", to: "#", phx_click: "next-buzz", phx_value_id: "data" %>
+    </button>
+
+    <table>
+      <thead>
+      </thead>
+
+      <tbody id="users">
+        <%= for {user, i} <- Enum.with_index(@users) do %>
+          <tr>
+            <td><%= i + 1 %></td>
+            <td><%= user %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
