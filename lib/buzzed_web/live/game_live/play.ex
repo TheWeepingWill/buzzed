@@ -1,22 +1,23 @@
 defmodule BuzzedWeb.GameLive.Play do
   use BuzzedWeb, :live_view
-
+  
   alias Buzzed.Games
+  alias BuzzedWeb.Endpoint
+  alias Buzzed.Accounts
+
+  on_mount {BuzzedWeb.GamesLive.InitAssigns, :default}
+  @game_buzz_topic "buzzer"
 
   @impl true
   def mount(_params, _session, socket) do
-    users = [
-      "Kate",
-      "William",
-      "Faith",
-      "Miki",
-      "Rich",
-      "Ivy"
-    ]
+    if connected?(socket) do
+      Endpoint.subscribe(@game_buzz_topic)
+    end
 
     {:ok,
      socket
-     |> assign(:users, users)}
+     |> assign(:users, [])
+     |> assign(:game_buzz_component_id, "buzzer")}
   end
 
   @impl true
@@ -44,7 +45,12 @@ defmodule BuzzedWeb.GameLive.Play do
   end
 
   def handle_event("buzz", _data, socket) do
-    {:noreply, assign(socket, :users, socket.assigns.users ++ ["Smith"])}
+    Endpoint.broadcast(@game_buzz_topic, "buzzer", socket.assigns.current_user)
+    {:noreply, socket}
+  end
+
+  def handle_info(%{event: "buzzer", payload: user}, socket) do
+    {:noreply, assign(socket, :users, socket.assigns.users ++ [Accounts.get_user!(user).email])}
   end
 
   def button_clear(assigns) do

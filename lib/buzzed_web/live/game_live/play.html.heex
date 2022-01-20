@@ -26,6 +26,9 @@
   <div>
     <button><%= link button_buzz(@socket), to: "#", phx_click: "buzz", phx_value_id: "data" %></button>
   </div>
+
+  <!-- List of buzzes for admin -->
+  <%= if @is_creator do %>
   <div>
 
     <button>
@@ -50,4 +53,5 @@
       </tbody>
     </table>
   </div>
+  <% end %>
 </div>

@@ -23,6 +23,13 @@ defmodule BuzzedWeb.Router do
     live "/", HomeLive
   end
 
+  live_session :default, on_mount: BuzzedWeb.GamesLive.InitAssigns do
+    scope "/games", BuzzedWeb do
+      pipe_through :browser
+      live "/games/play/:id", GameLive.Play, :play
+    end
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", BuzzedWeb do
   #   pipe_through :api
