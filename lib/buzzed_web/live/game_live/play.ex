@@ -3,7 +3,7 @@ defmodule BuzzedWeb.GameLive.Play do
   
   alias Buzzed.Games
   alias BuzzedWeb.Endpoint
-  alias Buzzed.Accounts
+  alias Buzzed.Accounts 
 
   on_mount {BuzzedWeb.GamesLive.InitAssigns, :default}
   @game_buzz_topic "buzzer"
@@ -34,7 +34,7 @@ defmodule BuzzedWeb.GameLive.Play do
   def handle_event("clear-buzzes", _data, socket) do
     {:noreply, assign(socket, :users, [])}
   end
-
+@impl true
   def handle_event("next-buzz", _data, socket) do
     if length(socket.assigns.users) > 1 do
       [_ | users] = socket.assigns.users
@@ -43,12 +43,12 @@ defmodule BuzzedWeb.GameLive.Play do
       {:noreply, assign(socket, :users, [])}
     end
   end
-
+@impl true
   def handle_event("buzz", _data, socket) do
     Endpoint.broadcast(@game_buzz_topic, "buzzer", socket.assigns.current_user)
     {:noreply, socket}
   end
-
+  @impl true
   def handle_info(%{event: "buzzer", payload: user}, socket) do
     {:noreply, assign(socket, :users, socket.assigns.users ++ [Accounts.get_user!(user).email])}
   end

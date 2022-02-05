@@ -19,6 +19,8 @@ defmodule BuzzedWeb.GameLive.Index do
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
+    IO.inspect("!!!!!!!!!!!!!!!!!!!!")
+    IO.inspect(id)
     socket
     |> assign(:page_title, "Edit Game")
     |> assign(:game, Games.get_game!(id))
