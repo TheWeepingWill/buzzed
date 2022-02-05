@@ -1,0 +1,29 @@
+
+    <%= if @live_action in [:edit] do %>
+      <.modal return_to={Routes.game_play_path(@socket, :play, @game)}>
+        <.live_component
+          module={BuzzedWeb.GameLive.FormComponent}
+          id={@game.id}
+          title={@page_title}
+          action={@live_action}
+          game={@game}
+          return_to={Routes.game_play_path(@socket, :play, @game)}
+        />
+      </.modal>
+    <% end %>
+
+
+<br><br><br><br>
+<h1 class="text-black text-5xl font-bold text-center"> Buzzed </h1>
+<br>
+
+<div class="container mx-auto h-56 w-60 p-4 border-4 flex flex-wrap box-border place-items-center h-screen">
+    <!-- buttons -->
+    <div class="text-center pl-7">
+        <%= live_redirect button_join(@socket), to: Routes.live_path(@socket, BuzzedWeb.HomeLive.HomePageLive)%>
+        <br>
+        <br>
+        <%= live_redirect button_new(@socket), to: Routes.game_index_path(@socket, :new)%>
+    </div>
+</div>
+ 

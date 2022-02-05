@@ -1,6 +1,6 @@
-defmodule BuzzedWeb.HomeLive do
+defmodule BuzzedWeb.HomeLive.HomePageLive do
   use BuzzedWeb, :live_view
-
+  @impl true
   def mount(_session, _params, socket) do
     {:ok, socket}
   end

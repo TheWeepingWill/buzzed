@@ -20,7 +20,7 @@ defmodule BuzzedWeb.Router do
   scope "/", BuzzedWeb do
     pipe_through :browser
 
-    live "/", HomeLive
+    live "/", HomeLive.HomePageLive
   end
 
   live_session :default, on_mount: BuzzedWeb.GamesLive.InitAssigns do
@@ -90,8 +90,8 @@ defmodule BuzzedWeb.Router do
     live "/games/new", GameLive.Index, :new
     live "/games/:id/edit", GameLive.Index, :edit
 
-    live "/games/play/:id", GameLive.Play, :play
-    live "/games/play/:id/play/edit", GameLive.Play, :edit
+    live "/games/play/:slug", GameLive.Play, :play
+    live "/games/play/:slug/play/edit", GameLive.Play, :edit
 
     live "/games/show/:id", GameLive.Show, :show
     live "/games/show/:id/show/edit", GameLive.Show, :edit
@@ -105,5 +105,7 @@ defmodule BuzzedWeb.Router do
     post "/user/confirm", UserConfirmationController, :create
     get "/user/confirm/:token", UserConfirmationController, :edit
     post "/user/confirm/:token", UserConfirmationController, :update
+
+    live "/join", HomeLive, :join
   end
 end

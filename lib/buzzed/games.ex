@@ -6,7 +6,7 @@ defmodule Buzzed.Games do
   import Ecto.Query, warn: false
   alias Buzzed.Repo
 
-  alias Buzzed.Games.Game
+  alias Buzzed.Games.Game 
 
   @doc """
   Returns the list of games.
@@ -35,7 +35,15 @@ defmodule Buzzed.Games do
       ** (Ecto.NoResultsError)
 
   """
-  def get_game!(id), do: Repo.get!(Game, id)
+   def get_game!(param) do
+    IO.inspect("********************")
+    IO.inspect(param)
+      if String.length(param) == 8 do 
+       Repo.get_by!(Game, slug: param)
+      else
+      Repo.get(Game, param)
+    end
+  end
 
   @doc """
   Creates a game.
@@ -101,4 +109,17 @@ defmodule Buzzed.Games do
   def change_game(%Game{} = game, attrs \\ %{}) do
     Game.changeset(game, attrs)
   end
+
+  @doc """ 
+     Takes a slug and returns a game with that exact slug
+  """
+
+   def find_by_slug!(slug) do
+     IO.inspect(slug)
+      if Repo.exists?(Game, slug: slug) do
+         Repo.one(from g in Game,  where: g.slug == ^slug)
+       else
+      end
+    
+    end
 end
